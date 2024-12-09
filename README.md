@@ -1,4 +1,4 @@
-# Comparador-de-Listas
+# Comparador de Listas
 
 Site: [Comparador de Listas](https://gabrioliv.github.io/comparador-de-listas/)
 
