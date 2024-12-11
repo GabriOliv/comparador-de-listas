@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr"><head>
+
+	<!-- Metadata -->
+	<title>Comparador de Listas</title>
+	<meta name="description" content="Ferramenta simples e eficiente para comparar listas de nomes. Compara duas listas (A e B) e retorna os resultados de conjuntos.">
+	<meta name="keywords" content="Teoria dos Conjuntos, Comparação de Listas, Conjuntos, Listas, Comparação, Diferença, Interseção, União">
+	<meta name="author" content="GabriOliv">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<!-- Bootstrap 5.3 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap Icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+	<!-- ClipboardJS -->
+	<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+</head>
+
+<body style="background-color: #564779;">
+
+	<header>
+
+		<div class="bg-dark collapse" id="navbarHeader">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-md-7 py-4">
+						<h4 class="text-white">Sobre</h4>
+						<p class="text-white">
+							Ferramenta simples e eficiente para comparar listas de nomes.<br>
+							Compara duas listas (A e B) e retorna os resultados de conjuntos.<br>
+						</p>
+					</div>
+					<div class="col-sm-4 offset-md-1 py-4">
+						<ul class="list-unstyled">
+							<li><a class="text-info text-decoration-none fs-5" href="https://github.com/GabriOliv">
+								<i class="bi bi-github"></i> GitHub
+							</a></li>
+							<li><a class="text-warning text-decoration-none fs-5" href="https://github.com/GabriOliv/comparador-de-listas">
+								<i class="bi bi-star"></i> Dê uma Estrela para o Projeto
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="navbar navbar-dark bg-dark shadow p-2 mb-3">
+			<div class="container">
+				<a href="" class="navbar-brand d-flex align-items-center" aria-label="Title">
+					<strong class="text-light text-decoration-none">
+						<h1 class="text-white">
+							<spam class="d-sm-none">
+								<i class="bi bi-text-left"></i>
+								<i class="bi bi-shuffle"></i>
+								<i class="bi bi-transparency"></i>
+							</spam>
+
+							<spam class="d-none d-sm-inline">Comparador de Listas</spam>
+						</h1>
+					</strong>
+				</a>
+
+				<button
+					class="btn btn-dark"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarHeader"
+					aria-controls="navbarHeader"
+					aria-expanded="true"
+					aria-label="Sobre">
+					<i class="bi bi-question-circle" style="font-size: 1.5rem"></i>
+				</button>
+			</div>
+		</div>
+
+	</header>
+
+	<div class="container">
+
+		<div class="container-fluid gx-0">
+			<div class="row gx-0 mt-3 p-1" style="background-color: #4D1C6E;">
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-tree-fill"></i> Árvore (Controle)
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Nomes que estão na arvore">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="listA" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="Lista A"></textarea>
+				</ul>
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-twitch"></i> Subs
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Lista ATUAL de Subscribers da Twitch">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="listB" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="Lista B"></textarea>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container-fluid gx-0">
+			<div class="row gx-0 mt-3 p-1" style="background-color: #4D1C6E;">
+				<div class="col d-flex justify-content-center">
+					<button onclick="compareLists()" class="btn btn-primary" aria-label="Compare as Listas">
+						<i class="bi bi-arrow-left-right"></i> Comparar Listas
+					</button>
+					<button onclick="clearFields()" class="btn btn-danger ms-2" aria-label="Limpar todos os campos">
+						<i class="bi bi-x-circle"></i> Limpar Campos
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="container-fluid gx-0">
+			<div class="row gx-0 mt-3 p-1" style="background-color: #4D1C6E;">
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-back"></i> Remover
+						<button class="btn btn-sm btn-outline-secondary float-end" id="copyDifferenceA" data-clipboard-target="#differenceA" aria-label="Copia Lista de Elementos apenas presentes na Lista A">
+							<i class="bi bi-clipboard"></i>
+						</button>
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Nomes que estão na Árvore mas não estão na Lista de Subs">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="differenceA" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="Apenas na Lista A" readonly></textarea>
+				</ul>
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-front"></i> Incluir
+						<button class="btn btn-sm btn-outline-secondary float-end" id="copyDifferenceB" data-clipboard-target="#differenceB" aria-label="Copia Lista de Elementos apenas presentes na Lista B">
+							<i class="bi bi-clipboard"></i>
+						</button>
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Nomes que estão na Lista de Subs mas não estão na Árvore">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="differenceB" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="Apenas na Lista B" readonly></textarea>
+				</ul>
+			</div>
+		</div>
+
+		<div class="container-fluid gx-0 pb-3">
+			<div class="row gx-0 mt-3 p-1" style="background-color: #4D1C6E;">
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-intersect"></i> Manter
+						<button class="btn btn-sm btn-outline-secondary float-end" id="copyIntersection" data-clipboard-target="#intersection" aria-label="Copia Lista de Interseção">
+							<i class="bi bi-clipboard"></i>
+						</button>
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Nomes dos Subs que já estão na Árvore">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="intersection" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="Interseção" readonly></textarea>
+				</ul>
+				<ul class="col col-md-6 list-group bg-body-secondary rounded-0">
+					<li class="list-group-item text-start">
+						<i class="bi bi-union"></i> (Sem Função)
+						<button class="btn btn-sm btn-outline-secondary float-end" id="copyUnion" data-clipboard-target="#union" aria-label="Copia Lista de União">
+							<i class="bi bi-clipboard"></i>
+						</button>
+						<button class="btn btn-sm btn-outline-secondary float-end me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="União de Elementos das duas Listas sem repetição">
+							<i class="bi bi-question-circle"></i>
+						</button>
+					</li>
+					<textarea class="form-control border-0 py-0 px-1 mx-0 mt-0 mb-1" id="union" rows="10" style="font-size: small; resize: none; height: 100%; background-color: transparent;" aria-label="União" readonly></textarea>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
+
+<script>
+
+	// Initialize textareas with the example lists
+
+	document.getElementById('listA').value = "Elemento A\nElemento C";
+	document.getElementById('listB').value = "Elemento B\nElemento C";
+	compareLists();
+
+	// Initialize tooltips
+
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl)
+	})
+
+	// Initialize ClipboardJS
+
+	let btnA = document.getElementById('copyDifferenceA');
+	let btnB = document.getElementById('copyDifferenceB');
+	let btnI = document.getElementById('copyIntersection');
+	let btnU = document.getElementById('copyUnion');
+
+	let clipboardA = new ClipboardJS(btnA);
+	let clipboardB = new ClipboardJS(btnB);
+	let clipboardI = new ClipboardJS(btnI);
+	let clipboardU = new ClipboardJS(btnU);
+
+	// Function to compare the lists
+
+	function compareLists() {
+		let listA = document.getElementById('listA').value.split('\n').map(item => item.trim()).filter(item => item);
+		let listB = document.getElementById('listB').value.split('\n').map(item => item.trim()).filter(item => item);
+
+		document.getElementById('intersection').value = listA.filter(value => listB.includes(value)).sort().join('\n');
+		document.getElementById('differenceA').value = listA.filter(value => !listB.includes(value)).sort().join('\n');
+		document.getElementById('differenceB').value = listB.filter(value => !listA.includes(value)).sort().join('\n');
+		document.getElementById('union').value = [...new Set([...listA, ...listB])].sort().join('\n');
+	};
+
+	// Function to clear the fields
+
+	function clearFields() {
+		document.getElementById('listA').value = '';
+		document.getElementById('listB').value = '';
+		document.getElementById('intersection').value = '';
+		document.getElementById('differenceA').value = '';
+		document.getElementById('differenceB').value = '';
+		document.getElementById('union').value = '';
+	};
+
+</script>
